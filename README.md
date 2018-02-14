@@ -1,13 +1,13 @@
 How to run:
 
 1. Setup Maven
-2. Download project folder
+2. Download project acceptanceTesting folder
 3. Open Terminal/Command line
-4. Go to project folder using cd command
-5. Execute mvm test command
+4. Go to project acceptanceTesting folder using cd command
+5. Execute mvn test command
 6. Enjoy!
 
-Note: test was run only on MAC OS, but, seems, should work on Windows OS
+Note: test was run only on MAC OS, but, seems, it should work on Windows OS
 
 Issues:
 
