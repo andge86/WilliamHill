@@ -31,7 +31,7 @@ public class PlaceBet {
     public WebDriver driver;
     public WebDriverWait wait;
 
-// Quick approach to use such variables to pass info from one method to another
+// Quick approach to use such variables to pass them from one method to another
     String odds;
     String betGiven;
     String deviceGiven;
@@ -50,7 +50,7 @@ public class PlaceBet {
     @Given("^I open WilliamHill football Competitions betting page from \"([^\"]*)\"$")
     public void i_open_WilliamHill_football_English_Premier_League_betting_page(String device) throws InterruptedException {
 
-        // Logic for running on DesKtop or from Mobile (using emulation)
+        // Logic for running on DesKtop or on Mobile (using emulation)
        if (device.equals("desktop")) {
            driver = new ChromeDriver();
            driver.manage().deleteAllCookies();
