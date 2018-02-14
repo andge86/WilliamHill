@@ -15,6 +15,8 @@ public class waiters {
         this.wait = wait;
     }
 
+    // Modified methods with waits
+
     public static void waitAndClick(WebElement element, WebDriverWait wait) throws InterruptedException {
 
         wait.until(ExpectedConditions.visibilityOf(element));
