@@ -11,4 +11,6 @@ Note: test was run only on MAC OS, but, seems, should work on Windows OS
 
 Issues:
 
-1. Needs to be added code for emulating mobile device. Found issues with moving the bet to betslip during emulating.
+1. Found an issue in code related to moving the bet to betslip during emulating mobile devices. 
+Bet is not moving and the betslip is empty.
+Tested on real devices and it works fine.
