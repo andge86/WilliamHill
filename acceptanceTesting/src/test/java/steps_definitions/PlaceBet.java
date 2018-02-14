@@ -31,27 +31,26 @@ public class PlaceBet {
     public WebDriver driver;
     public WebDriverWait wait;
 
-
+// Quick approach to use such variables to pass info from one method to another
     String odds;
     String betGiven;
     String deviceGiven;
 
-//
+
     @Before
     public void startBrowser() {
 
-        // choosing chromedriver for your OS
+        // Choosing ChromeDriver for your OS
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("mac")){
         System.setProperty("webdriver.chrome.driver", "chromedriver");}
         else {System.setProperty("webdriver.chrome.driver", "chromedriver.exe");}
-
         }
-
 
     @Given("^I open WilliamHill football Competitions betting page from \"([^\"]*)\"$")
     public void i_open_WilliamHill_football_English_Premier_League_betting_page(String device) throws InterruptedException {
 
+        // Logic for running on DesKtop or from Mobile (using emulation)
        if (device.equals("desktop")) {
            driver = new ChromeDriver();
            driver.manage().deleteAllCookies();
@@ -108,8 +107,9 @@ public class PlaceBet {
         odds = waitAndRetrieveText(footballCompetitionsPage.odds, wait);
         waitAndClick(footballCompetitionsPage.odds, wait);
 
-        if (deviceGiven.equals("mobile"))  // to work on mobile
+        if (deviceGiven.equals("mobile"))  // Fix to work on mobile emulation
         { waitAndClick(footballCompetitionsPage.betslipIcon, wait);}
+
         waitAndEnterText(footballCompetitionsPage.betslip, bet, wait);
 
         betGiven = bet;
@@ -119,6 +119,8 @@ public class PlaceBet {
     public void i_will_see_returns_based_on_bet_and_odds() throws InterruptedException {
         FootballCompetitionsPage footballCompetitionsPage = PageFactory.initElements(driver, FootballCompetitionsPage.class);
         String toReturn = waitAndRetrieveText(footballCompetitionsPage.toReturn, wait);
+
+        // Logic to compare returns value calculated by system and manually calculated using bet and odds
         int num;
         int demon;
 
