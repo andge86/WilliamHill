@@ -9,6 +9,8 @@ import org.decimal4j.util.DoubleRounder;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.BaseClass;
@@ -17,7 +19,8 @@ import pageobjects.FootballPage;
 import pageobjects.StartPage;
 
 import java.math.RoundingMode;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import static helpers.waiters.*;
 
@@ -31,6 +34,7 @@ public class PlaceBet {
 
     String odds;
     String betGiven;
+    String deviceGiven;
 
 //
     @Before
@@ -42,16 +46,34 @@ public class PlaceBet {
         System.setProperty("webdriver.chrome.driver", "chromedriver");}
         else {System.setProperty("webdriver.chrome.driver", "chromedriver.exe");}
 
-        driver = new ChromeDriver();
-        driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, 15);
-
         }
 
 
-    @Given("^I open WilliamHill football Competitions betting page$")
-    public void i_open_WilliamHill_football_English_Premier_League_betting_page() throws InterruptedException {
+    @Given("^I open WilliamHill football Competitions betting page from \"([^\"]*)\"$")
+    public void i_open_WilliamHill_football_English_Premier_League_betting_page(String device) throws InterruptedException {
+
+       if (device.equals("desktop")) {
+           driver = new ChromeDriver();
+           driver.manage().deleteAllCookies();
+           driver.manage().window().maximize();
+           wait = new WebDriverWait(driver, 15);
+
+           deviceGiven = device;
+       }
+       else if (device.equals("mobile")) {
+
+           Map<String, String> mobileEmulation = new HashMap<String, String>();
+           mobileEmulation.put("deviceName", "iPhone 7");
+           ChromeOptions chromeOptions = new ChromeOptions();
+           chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
+           driver = new ChromeDriver(chromeOptions);
+           driver.manage().deleteAllCookies();
+           driver.manage().window().maximize();
+           wait = new WebDriverWait(driver, 15);
+
+           deviceGiven = device;
+       }
+
         StartPage startPage = PageFactory.initElements(driver, StartPage.class);
         driver.get("http://sports.williamhill.com/betting/en-gb");
         waitAndClick(startPage.footballLink, wait);
@@ -85,7 +107,9 @@ public class PlaceBet {
         FootballCompetitionsPage footballCompetitionsPage = PageFactory.initElements(driver, FootballCompetitionsPage.class);
         odds = waitAndRetrieveText(footballCompetitionsPage.odds, wait);
         waitAndClick(footballCompetitionsPage.odds, wait);
-     // waitAndClick(footballCompetitionsPage.betslipLink, wait);
+
+        if (deviceGiven.equals("mobile"))  // to work on mobile
+        { waitAndClick(footballCompetitionsPage.betslipIcon, wait);}
         waitAndEnterText(footballCompetitionsPage.betslip, bet, wait);
 
         betGiven = bet;

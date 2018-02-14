@@ -13,12 +13,7 @@ public class StartPage extends BaseClass {
         super(driver);
     }
 
-
-
-
     @FindBy(how = How.ID, using = "nav-football")
     public static WebElement footballLink;
-
-
 
 }

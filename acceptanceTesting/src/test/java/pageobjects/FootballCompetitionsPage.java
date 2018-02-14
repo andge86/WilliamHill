@@ -15,8 +15,8 @@ public class FootballCompetitionsPage extends BaseClass{
     @FindBy(how = How.XPATH, using = "//div[@class = 'market-group marketW win-draw-win events-group-container']//div[@class ='btmarket__selection']//span[@class = 'betbutton__odds']")
     public static WebElement odds;
 
-//    @FindBy(how = How.XPATH, using = "//li[@id = 'betslip-tab'] |")
-//    public static WebElement betslipLink;
+    @FindBy(how = How.XPATH, using = "//div[@id = 'betslip-btn-toolbar']")
+    public static WebElement betslipIcon;
 
     @FindBy(how = How.XPATH, using = "//input[contains(@class, 'betslip-selection__stake-input')]")
     public static WebElement betslip;
