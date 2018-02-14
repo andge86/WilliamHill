@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class BaseClass {
@@ -18,7 +17,9 @@ public class BaseClass {
     public WebDriver driver;
 
 
-
+// Logging in WebElements are placed here because they are the same for all pages
+// Methods related to certain page are included in PlaceBet class.
+// Good idea is to include them into each page class as per POM practices.
 
     @FindBy(how = How.ID, using = "accountTabButton")
     public static WebElement accountButton;

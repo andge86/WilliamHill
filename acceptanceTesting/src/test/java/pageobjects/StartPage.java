@@ -13,6 +13,9 @@ public class StartPage extends BaseClass {
         super(driver);
     }
 
+// Methods related to certain page are included in PlaceBet class.
+// Good idea is to include them into each page class as per POM practices.
+
     @FindBy(how = How.ID, using = "nav-football")
     public static WebElement footballLink;
 
